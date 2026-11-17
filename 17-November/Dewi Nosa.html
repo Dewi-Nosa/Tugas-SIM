@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Page Summary — Market Leader POS Indonesia | Dewi Nosa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --red:#D93025; --blue:#1A43BF; --yellow:#F2B705; --black:#141414; --paper:#F4F1EA;
+  }
+  body { font-family:'Archivo',sans-serif; background:var(--paper); color:var(--black); }
+  .page { max-width:1200px; margin:0 auto; padding:28px 34px 40px; position:relative; overflow:hidden; }
+
+  /* ===== Header ===== */
+  header { display:grid; grid-template-columns:1fr auto; gap:20px; border-bottom:6px solid var(--black); padding-bottom:18px; }
+  .kicker { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.22em; font-size:11px; text-transform:uppercase; }
+  .kicker .dot { width:14px; height:14px; background:var(--red); border-radius:50%; }
+  h1 { font-size:clamp(30px,4.6vw,52px); font-weight:900; line-height:.98; text-transform:uppercase; margin-top:10px; }
+  h1 span { color:var(--blue); }
+  .shapes { display:flex; gap:10px; align-items:center; }
+  .sh-circle { width:74px;height:74px;border-radius:50%;background:var(--red); }
+  .sh-sq { width:74px;height:74px;background:var(--yellow); }
+  .sh-tri { width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:70px solid var(--blue); }
+  .meta { margin-top:8px; font-size:12px; font-weight:600; letter-spacing:.06em; }
+
+  /* ===== Verdict band ===== */
+  .verdict { display:grid; grid-template-columns:110px 1fr; gap:18px; margin:22px 0; align-items:stretch; }
+  .verdict .medal { background:var(--yellow); border:4px solid var(--black); display:flex; align-items:center; justify-content:center; font-size:44px; font-weight:900; }
+  .verdict .box { background:var(--blue); color:#fff; padding:16px 20px; border:4px solid var(--black); }
+  .verdict h2 { font-size:20px; text-transform:uppercase; letter-spacing:.04em; }
+  .verdict p { font-size:13.5px; line-height:1.5; margin-top:6px; color:#E8ECFF; }
+  .verdict b { color:var(--yellow); }
+
+  /* ===== Top 10 grid ===== */
+  .grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .card { border:3px solid var(--black); padding:12px 12px 14px; background:#fff; position:relative; min-height:150px; }
+  .card .rank { position:absolute; top:-14px; left:10px; width:30px;height:30px; display:flex;align-items:center;justify-content:center; font-weight:900; font-size:14px; color:#fff; background:var(--black); }
+  .card h3 { font-size:15.5px; font-weight:800; text-transform:uppercase; margin:10px 0 4px; }
+  .card p { font-size:11.5px; line-height:1.45; color:#333; }
+  .card .tag { display:inline-block; margin-top:8px; font-size:9.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:3px 7px; border:2px solid var(--black); }
+  .c1 .rank{background:var(--red)} .c1{background:#FFF6F5}
+  .c2 .rank{background:var(--blue)} .c2{background:#F2F5FF}
+  .c3 .rank{background:var(--yellow); color:var(--black)}
+  .tag.red{background:var(--red);color:#fff} .tag.blue{background:var(--blue);color:#fff} .tag.yel{background:var(--yellow)}
+
+  /* ===== Why section ===== */
+  .why { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:22px; }
+  .why .col { border-top:8px solid var(--black); padding-top:10px; }
+  .why .col:nth-child(1){border-color:var(--red)} .why .col:nth-child(2){border-color:var(--blue)} .why .col:nth-child(3){border-color:var(--yellow)}
+  .why h4 { font-size:13px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .why li { font-size:12px; line-height:1.55; margin-left:16px; margin-bottom:4px; }
+
+  /* ===== Sources ===== */
+  .sources { margin-top:24px; background:var(--black); color:#fff; padding:16px 20px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center; }
+  .sources .sh-tri-sm { width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-bottom:32px solid var(--yellow); }
+  .sources p { font-size:11px; line-height:1.6; color:#CFCFCF; }
+  .sources b { color:var(--yellow); letter-spacing:.1em; font-size:11px; }
+
+  footer { margin-top:16px; display:flex; justify-content:space-between; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+  footer .bar { height:8px; flex:1; margin:4px 14px 0; display:flex; }
+  footer .bar i { flex:1 } footer .bar i:nth-child(1){background:var(--red)} footer .bar i:nth-child(2){background:var(--blue)} footer .bar i:nth-child(3){background:var(--yellow)} footer .bar i:nth-child(4){background:var(--black)}
+
+  @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} .why{grid-template-columns:1fr} .shapes{display:none} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="kicker"><span class="dot"></span> One Page Summary &nbsp;·&nbsp; Riset Pasar &nbsp;·&nbsp; 17 November 2026</div>
+      <h1>10 Market Leader<br><span>Software POS</span> Indonesia</h1>
+      <p class="meta">Disusun dari 12 sumber analisis &nbsp;|&nbsp; Oleh: Dewi Nosa</p>
+    </div>
+    <div class="shapes">
+      <div class="sh-circle"></div><div class="sh-tri"></div><div class="sh-sq"></div>
+    </div>
+  </header>
+
+  <section class="verdict">
+    <div class="medal">★</div>
+    <div class="box">
+      <h2>Vonis Analisis: Moka POS — Market Leader Terkuat</h2>
+      <p>Berdasarkan sintesis 12 sumber, <b>Moka POS</b> dipimpin sebagai pemimpin pasar: pionir cloud POS sejak 2014, jangkauan puluhan ribu merchant F&amp;B &amp; retail, ekosistem paling lengkap (pembayaran QRIS, Moka Capital, integrasi akuntansi), dan dukungan korporasi besar (GoTo Group). <b>Majoo</b> menjadi penantang terdekat — unggul di manajemen SDM &amp; omnichannel — sementara <b>ESB</b> dominan di segmen harga-agresif FnB multi-cabang. Untuk UMKM mikro, <b>Qasir</b> menawarkan entry point gratis terbaik.</p>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card c1"><span class="rank">01</span><h3>Moka</h3><p>Ekosistem terlengkap, QRIS, multi-outlet, akses modal usaha. Standar industri FnB.</p><span class="tag red">Leader</span></div>
+    <div class="card c2"><span class="rank">02</span><h3>Majoo</h3><p>HR &amp; absensi GPS, dashboard owner, integrasi marketplace. Sangat kuat di omnichannel.</p><span class="tag blue">Challenger</span></div>
+    <div class="card c3"><span class="rank">03</span><h3>ESB</h3><p>Spesialis FnB multi-cabang &amp; franchise, harga kompetitif, suite lengkap (kitchen, inventory).</p><span class="tag yel">FnB</span></div>
+    <div class="card"><span class="rank">04</span><h3>Olsera</h3><p>Terbaik untuk retail &amp; grosir: stok canggih, dropship, cross-border, harga mulai ~Rp100rb/bln.</p><span class="tag blue">Retail</span></div>
+    <div class="card"><span class="rank">05</span><h3>Pawoon</h3><p>Offline mode paling andal, manajemen meja &amp; dapur, CRM loyalitas. Favorit kafe &amp; restoran.</p><span class="tag red">F&amp;B</span></div>
+    <div class="card"><span class="rank">06</span><h3>Qasir</h3><p>Paket gratis, utang-piutang, stok. Pilihan masuk akal #1 untuk toko kecil &amp; warung.</p><span class="tag yel">Gratis</span></div>
+    <div class="card"><span class="rank">07</span><h3>iREAP POS</h3><p>Konsisten direkomendasikan untuk retail &amp; grosir; konsolidasi multi-toko dan laporan kuat.</p><span class="tag blue">Retail</span></div>
+    <div class="card"><span class="rank">08</span><h3>Kasir Pintar</h3><p>Populer di UMKM lokal: mudah dipakai, harga terjangkau, komunitas pengguna besar.</p><span class="tag red">UMKM</span></div>
+    <div class="card"><span class="rank">09</span><h3>Nutapos</h3><p>Kontrol bahan baku &amp; food cost berbasis resep menu; analisis profitabilitas per menu.</p><span class="tag blue">Restoran</span></div>
+    <div class="card"><span class="rank">10</span><h3>Mekari / SkalaPOS</h3><p>Pemain enterprise &amp; ERP-integrated POS; kuat untuk bisnis butuh pembukuan end-to-end.</p><span class="tag yel">Enterprise</span></div>
+  </section>
+
+  <section class="why">
+    <div class="col">
+      <h4>Mengapa Moka Terbaik?</h4>
+      <ul>
+        <li>Pionir &amp; brand paling dikenal — basis merchant terbesar menurut data pasar (Ken Research, Similarweb).</li>
+        <li>Fitur paling lengkap: pembayaran terintegrasi, laporan komprehensif, multi-outlet terpusat.</li>
+        <li>Ekosistem finansial (Moka Capital) — nilai tambah yang tak dimiliki pesaing.</li>
+        <li>Backed by GoTo Group → kestabilan &amp; jaringan merchant luas.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>Kriteria 7 Fitur Kunci</h4>
+      <ul>
+        <li>Stok otomatis + peringatan menipis</li>
+        <li>Laporan real-time &amp; analitik</li>
+        <li>Multi-outlet / multi-cabang</li>
+        <li>Integrasi QRIS &amp; e-wallet</li>
+        <li>Offline mode yang andal</li>
+        <li>Hutang-piutang</li>
+        <li>Integrasi akuntansi/ERP</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>Pilih Sesuai Kebutuhan</h4>
+      <ul>
+        <li><b>Restoran/FnB:</b> Moka, ESB, Pawoon, Nutapos</li>
+        <li><b>Retail/Grosir:</b> Olsera, iREAP POS</li>
+        <li><b>Warung &amp; toko kecil:</b> Qasir (gratis), Kasir Pintar</li>
+        <li><b>Multi-cabang/franchise:</b> Moka, Majoo, ESB</li>
+        <li><b>Butuh akuntansi penuh:</b> Mekari, ERP-based POS</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sources">
+    <div class="sh-tri-sm"></div>
+    <p><b>Sumber (12):</b> ScaleOcean · HashMicro · Klikit · FounderPlus · ESB · KasirPintar · SkalaPOS · Sopwer.id · UMKM Go Digital · Kasir.id · Mekari Jurnal · Ken Research &amp; 6Wresearch (data pasar POS Indonesia 2025–2031). Ringkasan merupakan sintesis independen; harga &amp; fitur dapat berubah.</p>
+  </section>
+
+  <footer>
+    <span>Dewi Nosa</span>
+    <div class="bar"><i></i><i></i><i></i><i></i></div>
+    <span>Tugas-SIM · 17 November</span>
+  </footer>
+
+</div>
+</body>
+</html>
