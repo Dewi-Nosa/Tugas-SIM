@@ -1,70 +1,77 @@
-# 🍳 Kedai Ndrojos — Sistem Operasional Web
+# Kedai Ndrojos — Sistem Operasional 🍳
 
-Aplikasi kasir dan manajemen operasional **Kedai Ndrojos** versi web — modern, responsif, dan siap deploy ke GitHub Pages, Netlify, atau hosting statis apapun.
+Aplikasi web prototipe sistem operasional untuk **Kedai Ndrojos**, warung makan yang berdiri sejak **22 Oktober 2020**.
+
+## 🚀 Cara Menjalankan
+
+Cukup buka file `index.html` di browser — tidak perlu instalasi apapun!
+
+```bash
+# Klik dua kali file index.html, atau jalankan:
+start index.html   # Windows
+```
 
 ## ✨ Fitur Utama
 
-| Modul | Deskripsi |
-|---|---|
-| **📊 Dashboard** | Ringkasan omzet, laba, stok menipis, dan transaksi terbaru hari ini |
-| **🧾 Kasir Cepat** | POS dengan grid menu, filter kategori, search, hitung kembalian otomatis |
-| **📦 Stok & Kulakan** | Kelola stok bahan dapur, tambah stok cepat (kulakan), kasbon/utang pelanggan |
-| **🛒 Supplier** | Daftar pemasok dengan link telepon & WhatsApp langsung |
-| **📈 Laporan Keuangan** | Filter per hari/minggu/bulan/semua, export CSV, riwayat transaksi |
+### 📊 Dashboard
+- Ringkasan omzet hari ini & estimasi laba bersih
+- Peringatan stok bahan menipis secara real-time
+- Total catatan utang/kasbon pelanggan
+- Transaksi terbaru
 
-## 🚀 Cara Pakai
+### 🧾 Kasir Cepat (POS)
+- Grid menu dengan pencarian instan
+- Keranjang pesanan interaktif (tambah/kurangi qty)
+- **Kalkulator kembalian otomatis** — cegah salah hitung
+- Tombol nominal cepat (5rb, 10rb, 20rb, 50rb, 100rb)
+- Simpan pesanan sebagai **Kasbon/Utang Pelanggan**
+- Pengurangan stok otomatis saat transaksi
 
-### Buka Langsung di Browser
-1. Buka file `kedai-ndrojos/index.html` di browser
-2. Atau deploy ke GitHub Pages / Netlify
+### 📦 Stok & Kulakan
+- Daftar stok bahan dapur lengkap dengan indikator level
+- Edit jumlah stok langsung dari tabel
+- Daftar kasbon/utang pelanggan aktif + tombol lunas
+- Daftar supplier/kulakan untuk membandingkan harga
 
-### Via GitHub Pages
-1. Aktifkan GitHub Pages dari branch `coba-web`
-2. Set Source ke folder `/ (root)` atau `/kedai-ndrojos`
-3. Akses di `https://dewi-nosa.github.io/Tugas-SIM/kedai-ndrojos/`
+### 📈 Laporan Keuangan
+- Ringkasan pemasukan, pengeluaran, piutang, kerugian
+- Laba bersih kumulatif
+- Input pengeluaran/kulakan harian
+- Input bahan terbuang/kerugian
+- Riwayat semua transaksi
 
-## 📁 Struktur File
+## 🗂️ Struktur File
 
 ```
 kedai-ndrojos/
-├── index.html          ← Entry point SPA
+├── index.html          # Halaman utama (SPA)
 ├── css/
-│   └── style.css       ← Modern responsive stylesheet
+│   └── style.css       # Stylesheet
 ├── js/
-│   ├── data.js         ← Data layer (menu, stok, supplier) + localStorage
-│   └── app.js          ← Logika aplikasi (kasir, stok, laporan, supplier)
+│   ├── data.js         # Data layer (localStorage)
+│   └── app.js          # Logika aplikasi
 └── README.md
 ```
 
-## 📱 Responsif
+## 💾 Penyimpanan Data
 
-- **Desktop** — Layout sidebar + konten dua kolom
-- **Tablet** — Sidebar slide-over, konten satu kolom
-- **Mobile** — Fully mobile-first, tombol besar, kasir grid 3 kolom
+Semua data disimpan di **localStorage** browser — tidak perlu database atau server.
+Data persisten selama tidak dibersihkan cache browser.
 
-## 🗄 Data & Penyimpanan
+## 🔮 Rencana Pengembangan
 
-Semua data disimpan di **localStorage** browser sehingga:
-- Tidak memerlukan server/backend
-- Data persisten meski browser ditutup
-- Berjalan 100% offline setelah pertama kali dibuka
+- [ ] Ekspor laporan ke Excel/PDF
+- [ ] Multi-kasir / multi-user
+- [ ] Mode offline (PWA)
+- [ ] Notifikasi WhatsApp untuk stok menipis
+- [ ] Grafik penjualan harian/bulanan
+- [ ] Manajemen menu (tambah/edit/hapus)
 
-> **Catatan:** Karena menggunakan localStorage, data tidak sinkron antar perangkat/browser berbeda.
+## 📅 Riwayat Versi
 
-## 🛒 Menu Default Kedai Ndrojos
-
-| Menu | Harga | Kategori |
-|---|---|---|
-| Nasi Goreng Spesial | Rp 15.000 | Nasi |
-| Mie Goreng | Rp 12.000 | Mie |
-| Ayam Goreng | Rp 18.000 | Lauk |
-| Tempe Goreng | Rp 5.000 | Lauk |
-| Sayur Asem | Rp 8.000 | Sayur |
-| Tahu Goreng | Rp 4.000 | Lauk |
-| Es Teh Manis | Rp 5.000 | Minum |
-| Es Jeruk | Rp 7.000 | Minum |
-| Air Putih | Rp 2.000 | Minum |
-| Nasi Putih | Rp 4.000 | Nasi |
+| Versi | Tanggal | Keterangan |
+|-------|---------|------------|
+| v1.0  | Nov 2026 | Kerangka awal — 4 modul utama |
 
 ---
-Berdiri sejak 22 Oktober 2020 🎉 | v2.0 Web Edition
+*Dibuat dengan ❤️ untuk Kedai Ndrojos*
