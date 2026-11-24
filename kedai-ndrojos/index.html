@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kedai Ndrojos — Sistem Operasional</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">🍳</div>
+    <div class="logo-text">
+      <strong>Kedai Ndrojos</strong>
+      <span>Sistem Operasional</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-label">Menu Utama</div>
+    <div class="nav-item active" data-page="dashboard">
+      <span class="icon">📊</span> Dashboard
+    </div>
+    <div class="nav-item" data-page="kasir">
+      <span class="icon">🧾</span> Kasir Cepat
+    </div>
+
+    <div class="nav-label">Operasional</div>
+    <div class="nav-item" data-page="stok">
+      <span class="icon">📦</span> Stok &amp; Kulakan
+    </div>
+    <div class="nav-item" data-page="laporan">
+      <span class="icon">📈</span> Laporan Keuangan
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    Berdiri sejak 22 Okt 2020 🎉<br>
+    <small>v1.0 — Prototipe</small>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════════
+     MAIN WRAPPER
+════════════════════════════════════════════════════ -->
+<div class="main-wrap">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="btn-menu-toggle" id="btn-menu-toggle">☰</button>
+      <span id="topbar-title" class="topbar-title">📊 Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <span id="topbar-date" class="topbar-date"></span>
+      <span class="topbar-badge">Kedai Ndrojos</span>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════════
+       HALAMAN 1 — DASHBOARD
+  ═════════════════════════════════════════════════ -->
+  <main class="content">
+    <div class="page active" id="page-dashboard">
+      <div class="page-title"><span>📊</span> Ringkasan Hari Ini</div>
+
+      <!-- ALERT STOK MENIPIS -->
+      <div class="alert alert-warning" id="d-stok-alert" style="display:none">
+        <span>⚠️</span>
+        <span><strong>Stok Menipis!</strong> <span id="d-stok-alert-text"></span></span>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#FDF0EB">💰</div>
+          <div class="stat-info">
+            <div class="stat-label">Omzet Hari Ini</div>
+            <div class="stat-value" id="d-omzet">Rp 0</div>
+            <div class="stat-sub" id="d-jumlah-trx">0 transaksi</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#EAFAF1">📈</div>
+          <div class="stat-info">
+            <div class="stat-label">Estimasi Laba Bersih</div>
+            <div class="stat-value" style="color:var(--success)" id="d-laba">Rp 0</div>
+            <div class="stat-sub">Margin ±35%</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#FEF9E7">📦</div>
+          <div class="stat-info">
+            <div class="stat-label">Stok Menipis</div>
+            <div class="stat-value" style="color:var(--warning)" id="d-stok-menipis">0</div>
+            <div class="stat-sub">bahan perlu segera kulakan</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#FDEDEC">📋</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Utang Pelanggan</div>
+            <div class="stat-value" style="color:var(--danger)" id="d-utang">Rp 0</div>
+            <div class="stat-sub" id="d-pengeluaran">pengeluaran: Rp 0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW: Stok Menipis + Transaksi Terakhir -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">⚠️ Stok Perlu Perhatian</span>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('stok')">Kelola Stok</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Bahan</th><th>Sisa</th><th>Min</th><th>Level</th></tr></thead>
+              <tbody id="d-stok-tabel"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🧾 Transaksi Terbaru</span>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('laporan')">Lihat Semua</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Waktu</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody id="d-trx-tabel"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK ACCESS -->
+      <div class="card" style="margin-top:0">
+        <div class="card-title" style="margin-bottom:14px">⚡ Akses Cepat</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="navigateTo('kasir')">🧾 Buka Kasir</button>
+          <button class="btn btn-outline" onclick="navigateTo('stok')">📦 Cek Stok</button>
+          <button class="btn btn-outline" onclick="navigateTo('laporan')">📈 Laporan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         HALAMAN 2 — KASIR CEPAT (POS)
+    ═════════════════════════════════════════════════ -->
+    <div class="page" id="page-kasir">
+      <div class="page-title"><span>🧾</span> Kasir Cepat</div>
+
+      <div class="pos-layout">
+        <!-- Panel Menu -->
+        <div>
+          <div class="menu-search">
+            <input type="search" id="kasir-search" class="form-control"
+              placeholder="🔍 Cari menu atau kategori..."
+              oninput="renderMenuGrid(this.value)">
+          </div>
+          <div class="menu-grid" id="menu-grid"></div>
+        </div>
+
+        <!-- Panel Order -->
+        <div class="order-panel">
+          <div class="order-header">
+            🛒 Pesanan &nbsp;<span id="order-items-count" class="topbar-badge">0</span>
+          </div>
+          <div class="order-items" id="order-items">
+            <p style="text-align:center;color:var(--text-muted);padding:20px;font-size:13px">Ketuk menu untuk menambah pesanan</p>
+          </div>
+          <div class="order-footer">
+            <div class="order-row total">
+              <span>Total</span>
+              <span id="order-total">Rp 0</span>
+            </div>
+
+            <!-- Tombol Bayar Cepat -->
+            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+              <button class="btn btn-outline btn-sm quick-pay" data-val="5000">5rb</button>
+              <button class="btn btn-outline btn-sm quick-pay" data-val="10000">10rb</button>
+              <button class="btn btn-outline btn-sm quick-pay" data-val="20000">20rb</button>
+              <button class="btn btn-outline btn-sm quick-pay" data-val="50000">50rb</button>
+              <button class="btn btn-outline btn-sm quick-pay" data-val="100000">100rb</button>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Uang Diterima</label>
+              <input type="number" id="input-bayar" class="form-control"
+                placeholder="Masukkan nominal..." oninput="hitungKembalian()">
+            </div>
+
+            <!-- KEMBALIAN -->
+            <div class="kembalian-box" id="kembalian-box">
+              <div class="kembalian-label">💵 KEMBALIAN</div>
+              <div class="kembalian-value" id="kembalian-value">—</div>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" onclick="bayar()" style="margin-bottom:8px">
+              ✅ Bayar Sekarang
+            </button>
+            <button class="btn btn-outline btn-block" onclick="document.getElementById('modal-kasbon').classList.add('open')">
+              📋 Simpan sebagai Kasbon/Utang
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         HALAMAN 3 — STOK & KULAKAN
+    ═════════════════════════════════════════════════ -->
+    <div class="page" id="page-stok">
+      <div class="page-title"><span>📦</span> Stok &amp; Kulakan</div>
+
+      <!-- STOK BAHAN -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🥘 Stok Bahan Dapur</span>
+          <input type="search" class="form-control" style="max-width:200px"
+            placeholder="Cari bahan..." oninput="renderStokTable(this.value)">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bahan</th><th>Jumlah</th><th>Satuan</th>
+                <th>Min Stok</th><th>Harga Beli</th><th>Status</th><th>Level</th>
+              </tr>
+            </thead>
+            <tbody id="stok-tbody"></tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:12px">
+          💡 Klik angka jumlah untuk mengubah stok secara langsung. Stok berkurang otomatis saat transaksi kasir.
+        </p>
+      </div>
+
+      <!-- DAFTAR UTANG/KASBON -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📋 Kasbon / Utang Pelanggan Aktif</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Nama Pelanggan</th><th>Jumlah</th><th>Tanggal</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="utang-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DAFTAR SUPPLIER / KULAKAN -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🛒 Rencana Kulakan &amp; Supplier</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Supplier</th><th>Komoditi</th><th>Telepon</th><th>Catatan Harga</th><th>Rating</th></tr>
+            </thead>
+            <tbody id="supplier-tbody"></tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:12px">
+          💡 Data supplier bisa diperbarui untuk membandingkan harga pemasok. Edit file <code>js/data.js</code> untuk menambah supplier baru.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         HALAMAN 4 — LAPORAN KEUANGAN
+    ═════════════════════════════════════════════════ -->
+    <div class="page" id="page-laporan">
+      <div class="page-title"><span>📈</span> Laporan Keuangan</div>
+
+      <!-- RINGKASAN TOTAL -->
+      <div class="stat-grid" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#EAFAF1">💰</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Pemasukan</div>
+            <div class="stat-value" style="color:var(--success)" id="lap-masuk">Rp 0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#FDEDEC">🧾</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Pengeluaran</div>
+            <div class="stat-value" style="color:var(--danger)" id="lap-keluar">Rp 0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#FEF9E7">📋</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Piutang Belum Lunas</div>
+            <div class="stat-value" style="color:var(--warning)" id="lap-piutang">Rp 0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#EBF5FB">🗑️</div>
+          <div class="stat-info">
+            <div class="stat-label">Kerugian / Bahan Terbuang</div>
+            <div class="stat-value" style="color:var(--info)" id="lap-kerugian">Rp 0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Laba bersih highlight -->
+      <div class="card" style="text-align:center;padding:28px;margin-bottom:20px">
+        <div style="font-size:14px;color:var(--text-muted);font-weight:600;margin-bottom:8px">LABA BERSIH KUMULATIF</div>
+        <div style="font-size:40px;font-weight:900" id="lap-laba">Rp 0</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:6px">Pemasukan − Pengeluaran − Kerugian</div>
+      </div>
+
+      <!-- INPUT PENGELUARAN -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:16px">➕ Catat Pengeluaran / Kulakan</div>
+          <div class="form-group">
+            <label class="form-label">Nama Pengeluaran</label>
+            <input type="text" id="keluar-nama" class="form-control" placeholder="Misal: Beli beras 10kg">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jumlah (Rp)</label>
+            <input type="number" id="keluar-jumlah" class="form-control" placeholder="120000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Keterangan</label>
+            <input type="text" id="keluar-ket" class="form-control" placeholder="Optional">
+          </div>
+          <button class="btn btn-primary btn-block" onclick="tambahPengeluaran()">💾 Simpan Pengeluaran</button>
+
+          <div style="margin-top:18px">
+            <div class="card-title" style="margin-bottom:12px;font-size:13px">📋 Riwayat Pengeluaran</div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tanggal</th><th>Nama</th><th>Ket</th><th>Jumlah</th></tr></thead>
+                <tbody id="lap-keluar-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT KERUGIAN -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:16px">🗑️ Catat Kerugian / Bahan Terbuang</div>
+          <div class="form-group">
+            <label class="form-label">Nama Bahan / Kejadian</label>
+            <input type="text" id="buang-nama" class="form-control" placeholder="Misal: Nasi sisa basi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimasi Kerugian (Rp)</label>
+            <input type="number" id="buang-jumlah" class="form-control" placeholder="20000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Keterangan</label>
+            <input type="text" id="buang-ket" class="form-control" placeholder="Optional">
+          </div>
+          <button class="btn btn-danger btn-block" onclick="tambahKerugian()">🗑️ Catat Kerugian</button>
+
+          <div style="margin-top:18px">
+            <div class="card-title" style="margin-bottom:12px;font-size:13px">📋 Riwayat Kerugian</div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tanggal</th><th>Nama</th><th>Ket</th><th>Jumlah</th></tr></thead>
+                <tbody id="lap-kerugian-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIWAYAT TRANSAKSI -->
+      <div class="card" style="margin-top:4px">
+        <div class="card-header">
+          <span class="card-title">🧾 Riwayat Semua Transaksi</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Waktu</th><th>Item</th><th>Total</th><th>Status</th></tr>
+            </thead>
+            <tbody id="lap-trx-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main><!-- end .content -->
+</div><!-- end .main-wrap -->
+
+<!-- ══════════════════════════════════════════════════
+     MODAL — KASBON / UTANG
+════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-kasbon">
+  <div class="modal">
+    <div class="modal-title">📋 Simpan sebagai Kasbon / Utang</div>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:18px">
+      Pesanan akan dicatat sebagai utang pelanggan dan bisa ditandai lunas di menu Stok &amp; Kulakan.
+    </p>
+    <div class="form-group">
+      <label class="form-label">Nama Pelanggan</label>
+      <input type="text" id="kasbon-nama" class="form-control" placeholder="Misal: Pak Budi">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-kasbon').classList.remove('open')">Batal</button>
+      <button class="btn btn-primary" onclick="simpanKasbon()">💾 Simpan Kasbon</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Dependencies (tidak ada — pure HTML/CSS/JS)
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
